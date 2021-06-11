@@ -14,16 +14,9 @@ public class ServicioCrearProducto {
     }
 
     public String ejecutar(Producto producto) {
-        if(validarUnidadesDisponiblesContraUnidadesComprometidas(producto.getUnidadesComprometidas(),producto.getUnidadesDisponibles())){
-            Integer idProducto = this.repositorioProducto.crear(producto);
-            Producto productoCreada = this.repositorioProducto.buscarProductoPorId(idProducto);
-            return "Se ha creado el producto correctamente, con código: " + productoCreada.getCodigoProducto()
-                    + ", Descripción: " + productoCreada.getDescripcionProducto() + ", Unidades: " + productoCreada.getUnidadesDisponibles();
-        }
-        return "Error: Las unidades comprometidas no puede ser mayor a las unidades disponibles";
-    }
-
-    private boolean validarUnidadesDisponiblesContraUnidadesComprometidas(int unidadesComprometidas,int unidadesDisponibles) {
-        return  unidadesComprometidas > unidadesDisponibles ? false : true;
+        Integer idProducto = this.repositorioProducto.crear(producto);
+        Producto productoCreada = this.repositorioProducto.buscarProductoPorId(idProducto);
+        return "Se ha creado el producto correctamente, con código: " + productoCreada.getCodigoProducto()
+                + ", Descripción: " + productoCreada.getDescripcionProducto() + ", Unidades: " + productoCreada.getUnidadesDisponibles();
     }
 }

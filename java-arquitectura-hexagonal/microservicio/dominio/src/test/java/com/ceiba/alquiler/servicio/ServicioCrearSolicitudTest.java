@@ -93,7 +93,7 @@ public class ServicioCrearSolicitudTest {
         assertEquals("Error: El producto no cuenta con cantidades disponibles o no existe en el sistema", respuesta);
     }
 
-    @Test
+   /* @Test
     public void productoPorFueraDelMinimoDeDiasTest() {
         //Configuracion para el Test
 
@@ -169,7 +169,7 @@ public class ServicioCrearSolicitudTest {
         String respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(solicitudFallida);
         //Validacion del Test
         assertEquals("Error: Los días de alquiler es de 3 a 7", respuesta);
-    }
+    }*/
 
 
     private LocalDate ParseoDeFechas(String fecha){

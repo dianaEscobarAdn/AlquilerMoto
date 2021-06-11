@@ -1,5 +1,6 @@
 package com.ceiba.alquiler.dominio;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +13,11 @@ import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorObligatorio;
 
 public class ValidadorArgumento {
-	
+    private static final int DIAS_MINIMOS_DE_ANTICIPACION = 1;
+    private static final int DIAS_MINIMOS_DEL_ALQUILER = 3;
+    private static final int DIAS_MAXIMOS_DEL_ALQUILER = 7;
+    private static final int DIAS_MAXIMOS_DE_ANTICIPACION = 3;
+
 	private ValidadorArgumento() {}
 
     public static void validarObligatorio(Object valor, String mensaje) {
@@ -91,6 +96,34 @@ public class ValidadorArgumento {
         try {
             Long.parseLong(valor);
         } catch (NumberFormatException numberFormatException) {
+            throw new ExcepcionValorInvalido(mensaje);
+        }
+    }
+
+    public static void estaDentroDelMinimoDeDias(LocalDate fechaSolicitud,String mensaje) {
+        LocalDate fechaActual = LocalDate.now();
+        fechaSolicitud = fechaSolicitud.plusDays(-DIAS_MINIMOS_DE_ANTICIPACION);
+        if(!fechaActual.isEqual(fechaSolicitud) || fechaActual.isAfter(fechaSolicitud)){
+            throw new ExcepcionValorInvalido(mensaje);
+        }
+    }
+
+   public static void estaDentroDelMaximoDeDias(LocalDate fechaSolicitud,String mensaje) {
+        LocalDate fechaActual = LocalDate.now();
+        fechaSolicitud = fechaSolicitud.plusDays(-DIAS_MAXIMOS_DE_ANTICIPACION);
+        if(fechaActual.isBefore(fechaSolicitud)){
+            throw new ExcepcionValorInvalido(mensaje);
+        }
+    }
+
+    public static void estaDentroDelTiempoPermitido(Integer dias,String mensaje) {
+        if(DIAS_MINIMOS_DEL_ALQUILER > dias || dias > DIAS_MAXIMOS_DEL_ALQUILER){
+            throw new ExcepcionValorInvalido(mensaje);
+        }
+    }
+
+    public static void validarUnidadesDisponiblesContraUnidadesComprometidas(int unidadesComprometidas,int unidadesDisponibles,String mensaje) {
+        if(unidadesComprometidas > unidadesDisponibles){
             throw new ExcepcionValorInvalido(mensaje);
         }
     }
