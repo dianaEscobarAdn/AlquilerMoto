@@ -1,0 +1,8 @@
+select idPersona,cedula,nombre,apellido,telefono,direccion
+from persona
+
+select idProducto,codigoProducto,descripcionProducto,unidadesDisponibles,unidadesComprometidas
+from producto
+
+select idSolicitud,idProducto,idPersona,fechaSolicitud,diasAlquiler,fechaDevolucion,valorSolicitud,valorDeposito
+from solicitud
