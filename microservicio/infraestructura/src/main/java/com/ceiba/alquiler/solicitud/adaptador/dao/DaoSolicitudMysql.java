@@ -4,7 +4,6 @@ import com.ceiba.alquiler.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.alquiler.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.puerto.dao.DaoSolicitud;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

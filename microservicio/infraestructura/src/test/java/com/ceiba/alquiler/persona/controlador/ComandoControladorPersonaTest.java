@@ -41,4 +41,16 @@ public class ComandoControladorPersonaTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'respuesta':{'idPersona':2,'cedula':103666253,'nombre':'Prueba','apellido':'Integracion','telefono':2222222,'direccion':'calle 10'}}"));
     }
+
+    @Test
+    public void eliminar() throws Exception {
+        // arrange
+        Integer id = 2;
+
+        // act - assert
+        mocMvc.perform(delete("/persona/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

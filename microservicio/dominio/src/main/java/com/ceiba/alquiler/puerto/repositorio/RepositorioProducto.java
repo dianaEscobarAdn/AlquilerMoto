@@ -10,4 +10,6 @@ public interface RepositorioProducto {
    Producto buscarProductoPorId(Integer idProducto);
 
    void actualizar(Producto producto);
+
+   void eliminar(Integer id);
 }

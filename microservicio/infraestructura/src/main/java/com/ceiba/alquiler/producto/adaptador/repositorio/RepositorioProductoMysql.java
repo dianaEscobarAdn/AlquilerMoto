@@ -25,6 +25,9 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     @SqlStatement(namespace = "producto", value = "actualizar")
     private static String sqlActualizar;
 
+    @SqlStatement(namespace="producto", value="eliminar")
+    private static String sqlEliminar;
+
     public RepositorioProductoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -57,5 +60,13 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     @Override
     public void actualizar(Producto producto) {
         this.customNamedParameterJdbcTemplate.actualizar(producto, sqlActualizar);
+    }
+
+    @Override
+    public void eliminar(Integer idProducto) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("idProducto", idProducto);
+
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 }

@@ -1,4 +1,4 @@
-package com.ceiba.alquiler;
+package com.ceiba.alquiler.servicio.solicitud;
 
 import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;

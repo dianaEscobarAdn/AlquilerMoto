@@ -19,7 +19,7 @@ public class ComandoSolicitudTestDataBuilder {
     public ComandoSolicitudTestDataBuilder() {
         idProducto = 1;
         idPersona = 1;
-        fechaSolicitud = ParseoDeFechas("2021-06-16");
+        fechaSolicitud = ParseoDeFechas("2021-06-18");
         diasAlquiler = 5;
     }
 

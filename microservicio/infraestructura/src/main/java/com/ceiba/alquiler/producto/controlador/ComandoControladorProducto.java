@@ -3,14 +3,12 @@ package com.ceiba.alquiler.producto.controlador;
 import com.ceiba.alquiler.ComandoRespuesta;
 import com.ceiba.alquiler.comando.ComandoProducto;
 import com.ceiba.alquiler.comando.manejador.ManejadorCrearProducto;
+import com.ceiba.alquiler.comando.manejador.ManejadorEliminarProducto;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaProducto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/producto")
@@ -18,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ComandoControladorProducto {
 
     private final ManejadorCrearProducto manejadorCrearProducto;
+    private final ManejadorEliminarProducto manejadorEliminarProducto;
 
     @Autowired
-    public ComandoControladorProducto(ManejadorCrearProducto manejadorCrearProducto) {
+    public ComandoControladorProducto(ManejadorCrearProducto manejadorCrearProducto,ManejadorEliminarProducto manejadorEliminarProducto) {
         this.manejadorCrearProducto = manejadorCrearProducto;
+        this.manejadorEliminarProducto = manejadorEliminarProducto;
     }
 
     @PostMapping
@@ -29,4 +29,8 @@ public class ComandoControladorProducto {
     public ComandoRespuesta<DtoRespuestaProducto> crear(@RequestBody ComandoProducto comandoProducto) {
         return manejadorCrearProducto.ejecutar(comandoProducto);
     }
+
+    @DeleteMapping(value="/{id}")
+    @ApiOperation("Eliminar Producto")
+    public void eliminar(@PathVariable Integer id) {manejadorEliminarProducto.ejecutar(id);}
 }

@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,5 +40,17 @@ public class ComandoControladorProductoTest {
                 .content(objectMapper.writeValueAsString(producto)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'respuesta':{'idProducto':2,'codigoProducto':'123456','descripcionProducto':'Moto Prueba Unitaria','unidadesDisponibles':10,'unidadesComprometidas':2}}"));
+    }
+
+    @Test
+    public void eliminar() throws Exception {
+        // arrange
+        Integer id = 2;
+
+        // act - assert
+        mocMvc.perform(delete("/producto/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

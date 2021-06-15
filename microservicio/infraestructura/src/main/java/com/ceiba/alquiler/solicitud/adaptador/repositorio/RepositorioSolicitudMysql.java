@@ -23,6 +23,9 @@ public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperRe
     @SqlStatement(namespace= "solicitud", value="consultarSolicitud")
     private static String sqlConsultarSolicitud;
 
+    @SqlStatement(namespace="solicitud", value="eliminar")
+    private static String sqlEliminar;
+
     public RepositorioSolicitudMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -53,5 +56,13 @@ public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperRe
                 return solicitud;
             }
         });
+    }
+
+    @Override
+    public void eliminar(Integer idSolicitud) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("idSolicitud", idSolicitud);
+
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 }

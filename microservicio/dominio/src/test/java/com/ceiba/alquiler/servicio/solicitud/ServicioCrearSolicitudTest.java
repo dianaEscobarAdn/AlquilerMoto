@@ -1,9 +1,7 @@
-package com.ceiba.alquiler.servicio;
+package com.ceiba.alquiler.servicio.solicitud;
 
 import com.ceiba.alquiler.BasePrueba;
-import com.ceiba.alquiler.ServicioCrearSolicitud;
 import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
-import com.ceiba.alquiler.modelo.dto.DtoProducto;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;
 import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Producto;
@@ -24,7 +22,7 @@ public class ServicioCrearSolicitudTest {
     Solicitud solicitud;
 
     public ServicioCrearSolicitudTest() {
-        LocalDate localDate = ParseoDeFechas("2021-06-16");
+        LocalDate localDate = ParseoDeFechas("2021-06-18");
         this.solicitud = new Solicitud(null,12345, 12345, localDate, 5, null,null,null);
     }
 
@@ -43,8 +41,8 @@ public class ServicioCrearSolicitudTest {
                 5
         ));
 
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-18");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
         Mockito.when(repositorioSolicitud.buscarSolicitudPorId(1)).thenReturn(new Solicitud(
                 1,
                 1,
@@ -77,8 +75,8 @@ public class ServicioCrearSolicitudTest {
                 20
         ));
 
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-22");
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-18");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
         DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
         Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new DtoSolicitud(
                 1,
@@ -97,8 +95,8 @@ public class ServicioCrearSolicitudTest {
 
     @Test
     public void crearDtoSolicitud() {
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-22");
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-18");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
         DtoSolicitud solicitud = new DtoSolicitud (
                 1,
                 1,
@@ -121,8 +119,8 @@ public class ServicioCrearSolicitudTest {
 
     @Test
     public void crearDtoRespuestaSolicitud() {
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-22");
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-18");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
         DtoRespuestaSolicitud solicitud = new DtoRespuestaSolicitud (
                 1,
                 1,

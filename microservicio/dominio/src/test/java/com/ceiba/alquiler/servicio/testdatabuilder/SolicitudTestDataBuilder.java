@@ -19,7 +19,7 @@ public class SolicitudTestDataBuilder {
     public SolicitudTestDataBuilder() {
         idProducto = 123456;
         idPersona = 123456;
-        fechaSolicitud = ParseoDeFechas("2021-06-16");
+        fechaSolicitud = ParseoDeFechas("2021-06-18");
         diasAlquiler = 5;
     }
 

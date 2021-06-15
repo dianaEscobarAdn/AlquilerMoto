@@ -103,7 +103,7 @@ public class ValidadorArgumento {
     public static void estaDentroDelMinimoDeDias(LocalDate fechaSolicitud,String mensaje) {
         LocalDate fechaActual = LocalDate.now();
         fechaSolicitud = fechaSolicitud.plusDays(-DIAS_MINIMOS_DE_ANTICIPACION);
-        if(!fechaActual.isEqual(fechaSolicitud) || fechaActual.isAfter(fechaSolicitud)){
+        if(fechaActual.isAfter(fechaSolicitud)){
             throw new ExcepcionValorInvalido(mensaje);
         }
     }

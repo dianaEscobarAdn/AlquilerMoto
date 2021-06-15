@@ -6,7 +6,7 @@ import com.ceiba.alquiler.comando.fabrica.FabricaProducto;
 import com.ceiba.alquiler.manejador.ManejadorComandoRespuesta;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaProducto;
 import com.ceiba.alquiler.modelo.entidad.Producto;
-import com.ceiba.alquiler.ServicioCrearProducto;
+import com.ceiba.alquiler.servicio.producto.ServicioCrearProducto;
 import org.springframework.stereotype.Component;
 
 @Component

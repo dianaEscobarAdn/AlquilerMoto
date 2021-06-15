@@ -5,4 +5,4 @@ insert into producto(codigoProducto,descripcionProducto,unidadesDisponibles,unid
    values(12345,'Moto',20,5);
 
 insert into solicitud(idProducto,idPersona,fechaSolicitud,diasAlquiler,fechaDevolucion,valorSolicitud,valorDeposito)
-   values(1,1,'2021-06-16',5,'2021-06-22',125000.0,25000.0);
+   values(1,1,'2021-06-18',5,'2021-06-24',125000.0,25000.0);

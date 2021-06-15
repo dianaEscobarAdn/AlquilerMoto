@@ -1,7 +1,5 @@
-package com.ceiba.alquiler;
+package com.ceiba.alquiler.servicio.persona;
 
-import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
-import com.ceiba.alquiler.modelo.entidad.Persona;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioPersona;
 
 public class ServicioEliminarPersona {
@@ -11,4 +9,9 @@ public class ServicioEliminarPersona {
     public ServicioEliminarPersona(RepositorioPersona repositorioPersona) {
         this.repositorioPersona = repositorioPersona;
     }
+
+    public void ejecutar(Integer idPersona) {
+        this.repositorioPersona.eliminar(idPersona);
+    }
+
 }

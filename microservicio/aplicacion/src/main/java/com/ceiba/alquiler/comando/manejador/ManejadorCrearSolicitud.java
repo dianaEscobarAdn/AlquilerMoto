@@ -1,7 +1,7 @@
 package com.ceiba.alquiler.comando.manejador;
 
 import com.ceiba.alquiler.ComandoRespuesta;
-import com.ceiba.alquiler.ServicioCrearSolicitud;
+import com.ceiba.alquiler.servicio.solicitud.ServicioCrearSolicitud;
 import com.ceiba.alquiler.comando.ComandoSolicitud;
 import com.ceiba.alquiler.comando.fabrica.FabricaSolicitud;
 import com.ceiba.alquiler.manejador.ManejadorComandoRespuesta;

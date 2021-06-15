@@ -7,4 +7,6 @@ public interface RepositorioPersona {
     Integer crear(Persona persona);
 
     Persona buscarPersonaPorId(Integer idPersona);
+
+    void eliminar(Integer id);
 }

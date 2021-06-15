@@ -8,4 +8,6 @@ public interface RepositorioSolicitud {
 
     Solicitud buscarSolicitudPorId(Integer idSolicitud);
 
+    void eliminar(Integer id);
+
 }

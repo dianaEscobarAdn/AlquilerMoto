@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,6 +39,18 @@ public class ComandoControladorSolicitudTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(solicitud)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'respuesta':{'idSolicitud':2,'idProducto':1,'idPersona':1,'fechaSolicitud':'2021-06-16','diasAlquiler':5,'fechaDevolucion':'2021-06-22','valorSolicitud':125000.0,'valorDeposito':25000.0}}"));
+                .andExpect(content().json("{'respuesta':{'idSolicitud':2,'idProducto':1,'idPersona':1,'fechaSolicitud':'2021-06-18','diasAlquiler':5,'fechaDevolucion':'2021-06-24','valorSolicitud':125000.0,'valorDeposito':25000.0}}"));
+    }
+
+    @Test
+    public void eliminar() throws Exception {
+        // arrange
+        Integer id = 2;
+
+        // act - assert
+        mocMvc.perform(delete("/solicitud/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

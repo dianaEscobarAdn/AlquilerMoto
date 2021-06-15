@@ -1,4 +1,4 @@
-package com.ceiba.alquiler;
+package com.ceiba.alquiler.servicio.producto;
 
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaProducto;
 import com.ceiba.alquiler.modelo.entidad.Producto;

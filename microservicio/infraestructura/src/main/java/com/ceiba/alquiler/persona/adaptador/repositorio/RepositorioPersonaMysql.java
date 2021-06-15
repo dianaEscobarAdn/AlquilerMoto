@@ -54,4 +54,12 @@ public class RepositorioPersonaMysql implements RepositorioPersona {
             }
         });
     }
+
+    @Override
+    public void eliminar(Integer idPersona) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("idPersona", idPersona);
+
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
+    }
 }

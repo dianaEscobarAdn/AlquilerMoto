@@ -1,9 +1,7 @@
-package com.ceiba.alquiler.servicio;
+package com.ceiba.alquiler.servicio.persona;
 
-import com.ceiba.alquiler.ServicioCrearPersona;
 import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
-import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Persona;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioPersona;
 import org.junit.Test;
