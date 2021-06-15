@@ -31,7 +31,7 @@ pipeline {
             submoduleCfg: [],
             userRemoteConfigs: [[
             credentialsId: 'GitHub_dianaEscobar',
-            url:'https://github.com/dianaEscobarAdn/alquilerMoto'
+            url:'https://github.com/dianaEscobarAdn/alquilerMoto.git'
             ]]
         ])
       }
