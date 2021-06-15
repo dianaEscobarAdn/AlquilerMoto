@@ -1,5 +1,7 @@
 package com.ceiba.alquiler.servicio;
 
+import com.ceiba.alquiler.ServicioCrearSolicitud;
+import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.modelo.entidad.Solicitud;
 import com.ceiba.alquiler.puerto.dao.DaoSolicitud;
@@ -10,7 +12,6 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -41,7 +42,7 @@ public class ServicioCrearSolicitudTest {
         LocalDate fechaSolicitud = ParseoDeFechas("2021-06-12");
         LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
         DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
-        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new Solicitud(
+        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new DtoSolicitud(
                 1,
                 1,
                 1,
@@ -53,7 +54,7 @@ public class ServicioCrearSolicitudTest {
 
         ));
         //Ejecuccion del Test
-        String respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(this.solicitud);
+        Integer respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(this.solicitud);
         //Validacion del Test
         assertEquals("Se ha creado la solicitud correctamente - fecha devolucion: 2021-06-21, valor de la solicitud: 175000.0, valor del deposito: 35000.0", respuesta);
     }
@@ -76,7 +77,7 @@ public class ServicioCrearSolicitudTest {
         LocalDate fechaSolicitud = ParseoDeFechas("2021-06-12");
         LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
         DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
-        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new Solicitud(
+        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new DtoSolicitud(
                 1,
                 1,
                 1,
@@ -88,7 +89,7 @@ public class ServicioCrearSolicitudTest {
 
         ));
         //Ejecuccion del Test
-        String respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(this.solicitud);
+        Integer respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(this.solicitud);
         //Validacion del Test
         assertEquals("Error: El producto no cuenta con cantidades disponibles o no existe en el sistema", respuesta);
     }

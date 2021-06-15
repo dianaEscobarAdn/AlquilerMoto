@@ -1,17 +1,16 @@
 package com.ceiba.alquiler.puerto.dao;
 
-import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.modelo.entidad.Persona;
-
+import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import java.util.List;
 
 public interface DaoPersona {
 
     /**
-     * Permite listar persona
+     * Permite consultar persona
      * @return las personas
      */
-    List<Persona> consultarPersonas();
+    DtoPersona consultarPersona(Integer idPersona);
 
-    Persona consultarPersona(Integer idPersona);
+    List<DtoPersona> consultarPersonas();
 }

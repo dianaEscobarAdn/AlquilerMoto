@@ -18,7 +18,10 @@ public class ManejadorListarProducto {
         this.daoProducto = daoProducto;
     }
 
-    public ComandoRespuesta<List<ComandoProducto>> ejecutar() {
+
+    public List<DtoProducto> ejecutar(){ return this.daoProducto.consultarProductos(); }
+
+    /*public ComandoRespuesta<List<ComandoProducto>> ejecutar() {
         List<ComandoProducto> comandoProductoList = new ArrayList<>();
 
         this.daoProducto.consultarProductos().stream().forEach(producto -> {
@@ -31,5 +34,5 @@ public class ManejadorListarProducto {
             ));
         });
         return new ComandoRespuesta<>(comandoProductoList);
-    }
+    }*/
 }

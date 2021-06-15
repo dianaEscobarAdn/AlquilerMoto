@@ -1,5 +1,6 @@
 package com.ceiba.alquiler.puerto.dao;
 
+import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Solicitud;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface DaoSolicitud {
      * Permite listar solicitud
      * @return las solicitud
      */
-    List<Solicitud> consultarSolicitudes();
+    List<DtoSolicitud> consultarSolicitudes();
 
-    Solicitud consultarSolicitud(Integer idSolicitud);
+    DtoSolicitud consultarSolicitud(Integer idSolicitud);
 }

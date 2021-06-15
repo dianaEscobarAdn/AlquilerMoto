@@ -1,7 +1,5 @@
 package com.ceiba.alquiler.consulta;
 
-import com.ceiba.alquiler.ComandoRespuesta;
-import com.ceiba.alquiler.comando.ComandoPersona;
 import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.puerto.dao.DaoPersona;
 import org.springframework.stereotype.Component;
@@ -18,7 +16,12 @@ public class ManejadorListarPersonas {
         this.daoPersona = daoPersona;
     }
 
-    public ComandoRespuesta<List<ComandoPersona>> ejecutar() {
+    public List<DtoPersona> ejecutar(){
+        return this.daoPersona.consultarPersonas();
+    }
+
+
+    /*public ComandoRespuesta<List<ComandoPersona>> ejecutar() {
         List<ComandoPersona> comandoPersonaList = new ArrayList<>();
 
         this.daoPersona.consultarPersonas().stream().forEach(persona -> {
@@ -32,5 +35,5 @@ public class ManejadorListarPersonas {
             ));
         });
         return new ComandoRespuesta<>(comandoPersonaList);
-    }
+    }*/
 }

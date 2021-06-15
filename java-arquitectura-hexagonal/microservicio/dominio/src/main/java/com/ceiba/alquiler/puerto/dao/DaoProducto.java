@@ -11,7 +11,7 @@ public interface DaoProducto {
      * Permite listar producto
      * @return las productos
      */
-    List<Producto> consultarProductos();
+    List<DtoProducto> consultarProductos();
 
-    Producto consultarProducto(Integer idProducto);
+    DtoProducto consultarProducto(Integer idProducto);
 }

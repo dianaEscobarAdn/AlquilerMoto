@@ -19,7 +19,9 @@ public class ManejadorListarSolicitud {
         this.daoSolicitud = daoSolicitud;
     }
 
-    public ComandoRespuesta<List<ComandoSolicitud>> ejecutar() {
+    public List<DtoSolicitud> ejecutar(){ return this.daoSolicitud.consultarSolicitudes(); }
+
+   /* public ComandoRespuesta<List<ComandoSolicitud>> ejecutar() {
         List<ComandoSolicitud> comandoSolicitudList = new ArrayList<>();
 
         this.daoSolicitud.consultarSolicitudes().stream().forEach(solicitud -> {
@@ -35,5 +37,5 @@ public class ManejadorListarSolicitud {
             ));
         });
         return new ComandoRespuesta<>(comandoSolicitudList);
-    }
+    }*/
 }

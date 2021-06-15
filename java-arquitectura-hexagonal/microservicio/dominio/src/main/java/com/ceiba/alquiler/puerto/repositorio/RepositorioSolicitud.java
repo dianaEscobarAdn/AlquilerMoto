@@ -10,5 +10,7 @@ public interface RepositorioSolicitud {
      */
     Integer crear(Solicitud solicitud);
 
+    Solicitud buscarSolicitudPorId(Integer idSolicitud);
 
+  //  void actualizar(Solicitud solicitud);
 }

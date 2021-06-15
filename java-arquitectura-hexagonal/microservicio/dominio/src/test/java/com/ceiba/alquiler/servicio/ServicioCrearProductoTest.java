@@ -1,10 +1,9 @@
 package com.ceiba.alquiler.servicio;
 
-import com.ceiba.alquiler.modelo.dto.DtoProducto;
+import com.ceiba.alquiler.ServicioCrearProducto;
 import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioProducto;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,9 +29,9 @@ public class ServicioCrearProductoTest {
         ));
 
         //Ejecuccion del Test
-        String respuesta = new ServicioCrearProducto(repositorioProducto).ejecutar(this.producto);
+        int respuesta = new ServicioCrearProducto(repositorioProducto).ejecutar(this.producto);
         //Validacion del Test
-        assertEquals("Se ha creado el producto correctamente, con código: 123, Descripción: Moto, Unidades: 10", respuesta);
+        assertEquals(1, respuesta);
     }
 
     /*@Test

@@ -1,5 +1,6 @@
 package com.ceiba.alquiler.servicio;
 
+import com.ceiba.alquiler.ServicioCrearPersona;
 import com.ceiba.alquiler.modelo.entidad.Persona;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioPersona;
 import org.junit.Test;
@@ -21,8 +22,8 @@ public class ServicioCrearPersonaTest {
         RepositorioPersona repositorioPersona = Mockito.mock(RepositorioPersona.class);
         Mockito.when(repositorioPersona.crear(this.persona)).thenReturn(1);
         //Ejecuccion del Test
-        String respuesta = new ServicioCrearPersona(repositorioPersona).ejecutar(this.persona);
+        int respuesta = new ServicioCrearPersona(repositorioPersona).ejecutar(this.persona);
         //Validacion del Test
-        assertEquals("Se ha creado la persona con cedula: 1", respuesta);
+        assertEquals(1, respuesta);
     }
 }
