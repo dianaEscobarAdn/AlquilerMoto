@@ -16,6 +16,8 @@ public class RepositorioProductoMysql implements RepositorioProducto {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
+    private static final String ID_PRODUCTO = "idProducto";
+
     @SqlStatement(namespace = "producto", value = "crear")
     private static String sqlCrear;
 
@@ -38,15 +40,15 @@ public class RepositorioProductoMysql implements RepositorioProducto {
     }
 
     @Override
-    public Producto buscarProductoPorId(Integer idProducto) {
+    public Producto buscarProductoPorId(Integer id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idProducto", idProducto);
+        paramSource.addValue(ID_PRODUCTO, id);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarProducto, paramSource, new RowMapper<Producto>() {
             @Override
             public Producto mapRow(ResultSet rs, int rownumber) throws SQLException {
                 Producto producto = new Producto(
-                        rs.getInt("idProducto"),
+                        rs.getInt(ID_PRODUCTO),
                         rs.getString("codigoProducto"),
                         rs.getString("descripcionProducto"),
                         rs.getInt("unidadesDisponibles"),

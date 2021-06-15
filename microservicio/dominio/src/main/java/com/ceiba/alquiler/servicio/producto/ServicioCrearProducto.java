@@ -16,11 +16,11 @@ public class ServicioCrearProducto {
     public DtoRespuestaProducto ejecutar(Producto producto) {
        Integer idProducto = this.repositorioProducto.crear(producto);
        Producto productoCreado = this.repositorioProducto.buscarProductoPorId(idProducto);
-       DtoRespuestaProducto dtoRespuestaPersona = ConvertirADtoRespuesta(productoCreado);
+       DtoRespuestaProducto dtoRespuestaPersona = convertirADtoRespuesta(productoCreado);
        return dtoRespuestaPersona;
     }
 
-    public DtoRespuestaProducto ConvertirADtoRespuesta (Producto productoCreado){
+    public DtoRespuestaProducto convertirADtoRespuesta (Producto productoCreado){
         return productoCreado != null ? new DtoRespuestaProducto(
                 productoCreado.getIdProducto(),
                 productoCreado.getCodigoProducto(),

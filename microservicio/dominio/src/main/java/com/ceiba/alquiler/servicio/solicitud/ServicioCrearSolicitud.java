@@ -22,7 +22,7 @@ public class ServicioCrearSolicitud {
         }
         Integer idSolicitud = this.repositorioSolicitud.crear(solicitud);
         Solicitud solicitudCreada = this.repositorioSolicitud.buscarSolicitudPorId(idSolicitud);
-        DtoRespuestaSolicitud dtoRespuestaSolicitud = ConvertirADtoRespuesta(solicitudCreada);
+        DtoRespuestaSolicitud dtoRespuestaSolicitud = convertirADtoRespuesta(solicitudCreada);
         BuscarYActualizarCantidadesDelproducto(solicitud.getIdProducto());
         return dtoRespuestaSolicitud;
     }
@@ -42,7 +42,7 @@ public class ServicioCrearSolicitud {
         return cantidadTotal;
     }
 
-    public DtoRespuestaSolicitud ConvertirADtoRespuesta (Solicitud solicitudCreada){
+    public DtoRespuestaSolicitud convertirADtoRespuesta (Solicitud solicitudCreada){
         return solicitudCreada != null ? new DtoRespuestaSolicitud(
                 solicitudCreada.getIdSolicitud(),
                 solicitudCreada.getIdProducto(),

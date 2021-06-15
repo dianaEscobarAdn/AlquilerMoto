@@ -16,6 +16,8 @@ public class RepositorioPersonaMysql implements RepositorioPersona {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
+    private static final String ID_PERSONA = "idPersona";
+
     @SqlStatement(namespace= "persona", value="crear")
     private static String sqlCrear;
 
@@ -35,15 +37,15 @@ public class RepositorioPersonaMysql implements RepositorioPersona {
     }
 
     @Override
-    public Persona buscarPersonaPorId(Integer idPersona) {
+    public Persona buscarPersonaPorId(Integer id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idPersona", idPersona);
+        paramSource.addValue(ID_PERSONA, id);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarPersona,paramSource,new RowMapper<Persona>() {
             @Override
             public Persona mapRow(ResultSet rs, int rownumber) throws SQLException {
                 Persona persona = new Persona(
-                        rs.getInt("idPersona"),
+                        rs.getInt(ID_PERSONA),
                         rs.getInt("cedula"),
                         rs.getString("nombre"),
                         rs.getString("apellido"),

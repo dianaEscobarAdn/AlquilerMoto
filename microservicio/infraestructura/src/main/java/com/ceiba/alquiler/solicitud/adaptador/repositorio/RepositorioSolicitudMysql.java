@@ -15,6 +15,8 @@ import java.sql.SQLException;
 @Repository
 public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperResult {
 
+    private static final String ID_SOLICITUD = "idSolicitud";
+
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="solicitud", value="crear")
@@ -36,15 +38,15 @@ public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperRe
     }
 
     @Override
-    public Solicitud buscarSolicitudPorId(Integer idSolicitud) {
+    public Solicitud buscarSolicitudPorId(Integer id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idSolicitud", idSolicitud);
+        paramSource.addValue(String.valueOf(ID_SOLICITUD), id);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarSolicitud,paramSource,new RowMapper<Solicitud>() {
             @Override
             public Solicitud mapRow(ResultSet rs, int rownumber) throws SQLException {
                 Solicitud solicitud = new Solicitud(
-                        rs.getInt("idSolicitud"),
+                        rs.getInt(ID_SOLICITUD),
                         rs.getInt("idProducto"),
                         rs.getInt("idPersona"),
                         extraerLocalDate(rs, "fechaSolicitud"),

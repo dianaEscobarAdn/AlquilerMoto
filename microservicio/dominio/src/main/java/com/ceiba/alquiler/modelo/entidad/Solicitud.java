@@ -26,7 +26,7 @@ public class Solicitud {
     private Double valorDeposito;
 
     public Solicitud(Integer idSolicitud, Integer idProducto, Integer idPersona, LocalDate fechaSolicitud
-                ,Integer diasAlquiler, LocalDate fechaDevolucion, Double valorSolicitud, Double valorDeposito){
+                ,Integer diasAlquiler,LocalDate fechaDevolucion,Double valorSolicitud,Double valorDeposito){
         ValidadorArgumento.validarObligatorio(idProducto, SE_DEBE_INGRESAR_EL_ID_DEL_PRODUTO);
         ValidadorArgumento.validarObligatorio(idPersona, SE_DEBE_INGRESAR_EL_ID_DE_LA_PERSONA);
         ValidadorArgumento.validarObligatorio(fechaSolicitud, SE_DEBE_INGRESAR_LA_FECHA_DE_SOLICITUD);
@@ -41,7 +41,7 @@ public class Solicitud {
         this.fechaSolicitud = fechaSolicitud ;
         this.diasAlquiler = diasAlquiler;
         this.fechaDevolucion = this.calcularFechaMaximaDevolucion();
-        this.valorSolicitud = this.calcularValorDelAlquiler();;
+        this.valorSolicitud = this.calcularValorDelAlquiler();
         this.valorDeposito = this.calcularValorDelDeposito();
     }
 
@@ -86,7 +86,7 @@ public class Solicitud {
         int diasFestivos = 0;
         while (diasFestivos < this.diasAlquiler) {
             result = result.plusDays(1);
-            if (!(result.getDayOfWeek() == DayOfWeek.SUNDAY)) {
+            if (result.getDayOfWeek() != DayOfWeek.SUNDAY) {
                 ++diasFestivos;
             }
         }

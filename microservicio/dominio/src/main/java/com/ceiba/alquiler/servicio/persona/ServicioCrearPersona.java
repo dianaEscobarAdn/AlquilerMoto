@@ -15,11 +15,11 @@ public class ServicioCrearPersona {
     public DtoRespuestaPersona ejecutar(Persona persona) {
         Integer idPersona = this.repositorioPersona.crear(persona);
         Persona personaCreada = this.repositorioPersona.buscarPersonaPorId(idPersona);
-        DtoRespuestaPersona dtoRespuestaPersona = ConvertirADtoRespuesta(personaCreada);
+        DtoRespuestaPersona dtoRespuestaPersona = convertirADtoRespuesta(personaCreada);
         return dtoRespuestaPersona;
     }
 
-    public DtoRespuestaPersona ConvertirADtoRespuesta (Persona personaCreada){
+    public DtoRespuestaPersona convertirADtoRespuesta (Persona personaCreada){
         return personaCreada != null ? new DtoRespuestaPersona(
                 personaCreada.getIdPersona(),
                 personaCreada.getCedula(),
