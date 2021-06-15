@@ -26,7 +26,7 @@ public class Solicitud {
     private Double valorDeposito;
 
     public Solicitud(Integer idSolicitud, Integer idProducto, Integer idPersona, LocalDate fechaSolicitud
-                ,Integer diasAlquiler,LocalDate fechaDevolucion,Double valorSolicitud,Double valorDeposito){
+                ,Integer diasAlquiler){
         ValidadorArgumento.validarObligatorio(idProducto, SE_DEBE_INGRESAR_EL_ID_DEL_PRODUTO);
         ValidadorArgumento.validarObligatorio(idPersona, SE_DEBE_INGRESAR_EL_ID_DE_LA_PERSONA);
         ValidadorArgumento.validarObligatorio(fechaSolicitud, SE_DEBE_INGRESAR_LA_FECHA_DE_SOLICITUD);
@@ -43,6 +43,26 @@ public class Solicitud {
         this.fechaDevolucion = this.calcularFechaMaximaDevolucion();
         this.valorSolicitud = this.calcularValorDelAlquiler();
         this.valorDeposito = this.calcularValorDelDeposito();
+    }
+
+    public Solicitud(Integer idSolicitud, Integer idProducto, Integer idPersona, LocalDate fechaSolicitud
+            ,Integer diasAlquiler,LocalDate fechaDevolucion,Double valorSolicitud, Double valorDeposito){
+        ValidadorArgumento.validarObligatorio(idProducto, SE_DEBE_INGRESAR_EL_ID_DEL_PRODUTO);
+        ValidadorArgumento.validarObligatorio(idPersona, SE_DEBE_INGRESAR_EL_ID_DE_LA_PERSONA);
+        ValidadorArgumento.validarObligatorio(fechaSolicitud, SE_DEBE_INGRESAR_LA_FECHA_DE_SOLICITUD);
+        ValidadorArgumento.validarObligatorio(diasAlquiler, SE_DEBE_INGRESAR_LOS_DIAS_DEL_ALQUILER);
+        ValidadorArgumento.estaDentroDelMinimoDeDias(fechaSolicitud, POR_FUERA_RANGO_DE_FECHA_PARA_SOLICITAR);
+        ValidadorArgumento.estaDentroDelMaximoDeDias(fechaSolicitud, POR_FUERA_RANGO_DE_FECHA_PARA_SOLICITAR);
+        ValidadorArgumento.estaDentroDelTiempoPermitido(diasAlquiler, POR_FUERA_RANGO_DE_DIAS_DE_LA_SOLICITUD);
+
+        this.idSolicitud = idSolicitud;
+        this.idProducto = idProducto;
+        this.idPersona = idPersona;
+        this.fechaSolicitud = fechaSolicitud ;
+        this.diasAlquiler = diasAlquiler;
+        this.fechaDevolucion = fechaDevolucion;
+        this.valorSolicitud = valorSolicitud;
+        this.valorDeposito = valorDeposito;
     }
 
     private Double calcularValorDelAlquiler() {return VALOR_POR_DIA_DEL_ALQUILER * this.diasAlquiler;}

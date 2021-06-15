@@ -13,10 +13,7 @@ public class FabricaSolicitud {
                 comandoSolicitud.getIdProducto(),
                 comandoSolicitud.getIdPersona(),
                 comandoSolicitud.getFechaSolicitud(),
-                comandoSolicitud.getDiasAlquiler(),
-                comandoSolicitud.getFechaDevolucion(),
-                comandoSolicitud.getValorSolicitud(),
-                comandoSolicitud.getValorDeposito()
+                comandoSolicitud.getDiasAlquiler()
         );
     }
 }

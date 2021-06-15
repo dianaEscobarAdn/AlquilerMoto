@@ -24,7 +24,7 @@ public class ServicioCrearSolicitudTest {
 
     public ServicioCrearSolicitudTest() {
         LocalDate localDate = ParseoDeFechas("2021-06-18");
-        this.solicitud = new Solicitud(null,12345, 12345, localDate, 5, null,null,null);
+        this.solicitud = new Solicitud(null,12345, 12345, localDate, 5);
     }
 
     @Test
@@ -53,7 +53,6 @@ public class ServicioCrearSolicitudTest {
                 fechaDevolucion,
                 175000.0,
                 35000.0
-
         ));
         //Ejecuccion del Test
         DtoRespuestaSolicitud respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud);
@@ -221,5 +220,4 @@ public class ServicioCrearSolicitudTest {
                 35000.0
         ), ExcepcionValorObligatorio.class,"Se debe ingresar el id del producto");
     }
-
 }
