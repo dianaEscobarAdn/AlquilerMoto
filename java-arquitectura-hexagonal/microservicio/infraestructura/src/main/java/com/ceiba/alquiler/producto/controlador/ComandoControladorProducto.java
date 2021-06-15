@@ -3,6 +3,7 @@ package com.ceiba.alquiler.producto.controlador;
 import com.ceiba.alquiler.ComandoRespuesta;
 import com.ceiba.alquiler.comando.ComandoProducto;
 import com.ceiba.alquiler.comando.manejador.ManejadorCrearProducto;
+import com.ceiba.alquiler.modelo.dto.DtoRespuestaProducto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ComandoControladorProducto {
 
     @PostMapping
     @ApiOperation("Crear Producto")
-    public ComandoRespuesta<Integer> crear(@RequestBody ComandoProducto comandoProducto) {
+    public ComandoRespuesta<DtoRespuestaProducto> crear(@RequestBody ComandoProducto comandoProducto) {
         return manejadorCrearProducto.ejecutar(comandoProducto);
     }
 }

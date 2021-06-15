@@ -33,8 +33,6 @@ public class ConsultaControladorSolicitudTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].nombre", is("test")));
+                .andExpect(jsonPath("$[0].idSolicitud", is(1)));
     }
-
-
 }

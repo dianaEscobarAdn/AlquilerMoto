@@ -1,7 +1,6 @@
 package com.ceiba.alquiler.solicitud.adaptador.dao;
 
 import com.ceiba.alquiler.infraestructura.jdbc.MapperResult;
-import com.ceiba.alquiler.modelo.dto.DtoProducto;
 import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -25,5 +24,4 @@ public class MapeoSolicitud implements RowMapper<DtoSolicitud>, MapperResult {
 
         return new DtoSolicitud(idSolicitud,idProducto,idPersona,fechaSolicitud,diasAlquiler,fechaDevolucion,valorSolicitud,valorDeposito);
     }
-
 }

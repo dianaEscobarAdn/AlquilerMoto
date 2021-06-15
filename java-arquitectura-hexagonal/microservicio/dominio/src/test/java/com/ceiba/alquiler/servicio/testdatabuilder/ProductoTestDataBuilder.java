@@ -17,11 +17,6 @@ public class ProductoTestDataBuilder {
         unidadesSolicitadas = 2;
     }
 
-    public ProductoTestDataBuilder conCodigoProducto(String codigoProducto) {
-        this.codigoProducto = codigoProducto;
-        return this;
-    }
-
     public Producto build() {
         return new Producto(idProducto,codigoProducto, descripcionProducto,unidadesDisponibles,unidadesSolicitadas);
     }

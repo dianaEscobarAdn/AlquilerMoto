@@ -1,6 +1,10 @@
 package com.ceiba.alquiler.servicio;
 
+import com.ceiba.alquiler.BasePrueba;
 import com.ceiba.alquiler.ServicioCrearSolicitud;
+import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.alquiler.modelo.dto.DtoProducto;
+import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;
 import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.modelo.entidad.Solicitud;
@@ -20,7 +24,7 @@ public class ServicioCrearSolicitudTest {
     Solicitud solicitud;
 
     public ServicioCrearSolicitudTest() {
-        LocalDate localDate = ParseoDeFechas("2021-06-12");
+        LocalDate localDate = ParseoDeFechas("2021-06-16");
         this.solicitud = new Solicitud(null,12345, 12345, localDate, 5, null,null,null);
     }
 
@@ -39,10 +43,9 @@ public class ServicioCrearSolicitudTest {
                 5
         ));
 
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-12");
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
         LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
-        DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
-        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new DtoSolicitud(
+        Mockito.when(repositorioSolicitud.buscarSolicitudPorId(1)).thenReturn(new Solicitud(
                 1,
                 1,
                 1,
@@ -54,9 +57,9 @@ public class ServicioCrearSolicitudTest {
 
         ));
         //Ejecuccion del Test
-        Integer respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(this.solicitud);
+        DtoRespuestaSolicitud respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud);
         //Validacion del Test
-        assertEquals("Se ha creado la solicitud correctamente - fecha devolucion: 2021-06-21, valor de la solicitud: 175000.0, valor del deposito: 35000.0", respuesta);
+        assertEquals(1, respuesta.getIdSolicitud().intValue());
     }
 
     @Test
@@ -74,8 +77,8 @@ public class ServicioCrearSolicitudTest {
                 20
         ));
 
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-12");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-22");
         DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
         Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new DtoSolicitud(
                 1,
@@ -88,90 +91,57 @@ public class ServicioCrearSolicitudTest {
                 35000.0
 
         ));
-        //Ejecuccion del Test
-        Integer respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(this.solicitud);
-        //Validacion del Test
-        assertEquals("Error: El producto no cuenta con cantidades disponibles o no existe en el sistema", respuesta);
-    }
-
-   /* @Test
-    public void productoPorFueraDelMinimoDeDiasTest() {
-        //Configuracion para el Test
-
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-11");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
-        Solicitud solicitudFallida = new Solicitud(null,12345, 12345, fechaSolicitud, 5, null,null,null);
-
-        RepositorioSolicitud repositorioSolicitud = Mockito.mock(RepositorioSolicitud.class);
-        Mockito.when(repositorioSolicitud.crear(solicitudFallida)).thenReturn(1);
-
-        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
-        Mockito.when(repositorioProducto.buscarProductoPorId(solicitudFallida.getIdProducto())).thenReturn(new Producto(
-                1,
-                "12345",
-                "hola",
-                20,
-                5
-        ));
-
-
-        DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
-        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new Solicitud(
-                1,
-                1,
-                1,
-                fechaSolicitud,
-                5,
-                fechaDevolucion,
-                175000.0,
-                35000.0
-
-        ));
-        //Ejecuccion del Test
-        String respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(solicitudFallida);
-        //Validacion del Test
-        assertEquals("Error: La solicitud se debe hacer con minímo uno  y maximo tres días de anticipación", respuesta);
+        //act - assert
+        BasePrueba.assertThrows(() -> new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud), ExcepcionValorInvalido.class,"El producto no cuenta con cantidades disponibles o no ha sido creado");
     }
 
     @Test
-    public void productoPorFueraDelTiempoPermitidoTest() {
-        //Configuracion para el Test
-
-        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-12");
-        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-21");
-        Solicitud solicitudFallida = new Solicitud(null,12345, 12345, fechaSolicitud, 8, null,null,null);
-
-        RepositorioSolicitud repositorioSolicitud = Mockito.mock(RepositorioSolicitud.class);
-        Mockito.when(repositorioSolicitud.crear(solicitudFallida)).thenReturn(1);
-
-        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
-        Mockito.when(repositorioProducto.buscarProductoPorId(solicitudFallida.getIdProducto())).thenReturn(new Producto(
-                1,
-                "12345",
-                "hola",
-                20,
-                5
-        ));
-
-
-        DaoSolicitud daoSolicitud = Mockito.mock(DaoSolicitud.class);
-        Mockito.when(daoSolicitud.consultarSolicitud(1)).thenReturn(new Solicitud(
+    public void crearDtoSolicitud() {
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-22");
+        DtoSolicitud solicitud = new DtoSolicitud (
                 1,
                 1,
                 1,
                 fechaSolicitud,
-                8,
+                1,
                 fechaDevolucion,
                 175000.0,
                 35000.0
+        );
+        assertEquals(1, solicitud.getIdSolicitud().intValue());
+        assertEquals(1, solicitud.getIdProducto().intValue());
+        assertEquals(1, solicitud.getIdPersona().intValue());
+        assertEquals(fechaSolicitud, solicitud.getFechaSolicitud());
+        assertEquals(1, solicitud.getDiasAlquiler().intValue());
+        assertEquals(fechaDevolucion, solicitud.getFechaDevolucion());
+        assertEquals(175000.0, solicitud.getValorSolicitud().doubleValue());
+        assertEquals(35000.0, solicitud.getValorDeposito().doubleValue());
+    }
 
-        ));
-        //Ejecuccion del Test
-        String respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud).ejecutar(solicitudFallida);
-        //Validacion del Test
-        assertEquals("Error: Los días de alquiler es de 3 a 7", respuesta);
-    }*/
-
+    @Test
+    public void crearDtoRespuestaSolicitud() {
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-16");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-22");
+        DtoRespuestaSolicitud solicitud = new DtoRespuestaSolicitud (
+                1,
+                1,
+                1,
+                fechaSolicitud,
+                1,
+                fechaDevolucion,
+                175000.0,
+                35000.0
+        );
+        assertEquals(1, solicitud.getIdSolicitud().intValue());
+        assertEquals(1, solicitud.getIdProducto().intValue());
+        assertEquals(1, solicitud.getIdPersona().intValue());
+        assertEquals(fechaSolicitud, solicitud.getFechaSolicitud());
+        assertEquals(1, solicitud.getDiasAlquiler().intValue());
+        assertEquals(fechaDevolucion, solicitud.getFechaDevolucion());
+        assertEquals(175000.0, solicitud.getValorSolicitud().doubleValue());
+        assertEquals(35000.0, solicitud.getValorDeposito().doubleValue());
+    }
 
     private LocalDate ParseoDeFechas(String fecha){
         return LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd"));

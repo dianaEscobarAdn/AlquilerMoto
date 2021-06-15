@@ -2,11 +2,8 @@ package com.ceiba.alquiler.producto.adaptador.dao;
 
 import com.ceiba.alquiler.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.alquiler.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.modelo.dto.DtoProducto;
-import com.ceiba.alquiler.persona.adaptador.dao.MapeoPersona;
 import com.ceiba.alquiler.puerto.dao.DaoProducto;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,13 +26,5 @@ public class DaoProductoMysql implements DaoProducto {
     @Override
     public List<DtoProducto> consultarProductos() {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoProducto());
-    }
-
-    @Override
-    public DtoProducto consultarProducto(Integer idProducto) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idProducto", idProducto);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListarPorId, paramSource, DtoProducto.class);
     }
 }

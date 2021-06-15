@@ -23,11 +23,6 @@ public class SolicitudTestDataBuilder {
         diasAlquiler = 5;
     }
 
-    public SolicitudTestDataBuilder conDiasAlquiler(Integer diasAlquiler) {
-        this.diasAlquiler = diasAlquiler;
-        return this;
-    }
-
     public Solicitud build() {
         return new Solicitud(idSolicitud,idProducto, idPersona,fechaSolicitud,diasAlquiler,fechaDevolucion,valorSolicitud,valorDeposito);
     }

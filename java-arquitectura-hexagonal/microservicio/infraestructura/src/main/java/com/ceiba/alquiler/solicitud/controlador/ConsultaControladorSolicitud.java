@@ -26,5 +26,4 @@ public class ConsultaControladorSolicitud {
     public List<DtoSolicitud> listar() {
         return this.manejadorListarSolicitud.ejecutar();
     }
-
 }

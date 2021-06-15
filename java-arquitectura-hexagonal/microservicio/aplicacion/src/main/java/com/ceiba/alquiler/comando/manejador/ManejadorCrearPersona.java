@@ -4,12 +4,13 @@ import com.ceiba.alquiler.ComandoRespuesta;
 import com.ceiba.alquiler.comando.ComandoPersona;
 import com.ceiba.alquiler.comando.fabrica.FabricaPersona;
 import com.ceiba.alquiler.manejador.ManejadorComandoRespuesta;
+import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
 import com.ceiba.alquiler.modelo.entidad.Persona;
 import com.ceiba.alquiler.ServicioCrearPersona;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorCrearPersona implements ManejadorComandoRespuesta<ComandoPersona, ComandoRespuesta<Integer>> {
+public class ManejadorCrearPersona implements ManejadorComandoRespuesta<ComandoPersona, ComandoRespuesta<DtoRespuestaPersona>> {
 
     private final FabricaPersona fabricaPersona;
     private ServicioCrearPersona servicioCrearPersona;
@@ -19,7 +20,7 @@ public class ManejadorCrearPersona implements ManejadorComandoRespuesta<ComandoP
         this.servicioCrearPersona = servicioCrearPersona;
     }
 
-    public ComandoRespuesta<Integer> ejecutar(ComandoPersona comandoPersona) {
+    public ComandoRespuesta<DtoRespuestaPersona> ejecutar(ComandoPersona comandoPersona) {
         Persona persona = this.fabricaPersona.crear(comandoPersona);
         return new ComandoRespuesta<>(this.servicioCrearPersona.ejecutar(persona));
     }

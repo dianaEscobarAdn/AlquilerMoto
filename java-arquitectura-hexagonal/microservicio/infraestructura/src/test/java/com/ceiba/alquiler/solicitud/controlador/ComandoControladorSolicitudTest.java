@@ -38,6 +38,6 @@ public class ComandoControladorSolicitudTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(solicitud)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 2}"));
+                .andExpect(content().json("{'respuesta':{'idSolicitud':2,'idProducto':1,'idPersona':1,'fechaSolicitud':'2021-06-16','diasAlquiler':5,'fechaDevolucion':'2021-06-22','valorSolicitud':125000.0,'valorDeposito':25000.0}}"));
     }
 }

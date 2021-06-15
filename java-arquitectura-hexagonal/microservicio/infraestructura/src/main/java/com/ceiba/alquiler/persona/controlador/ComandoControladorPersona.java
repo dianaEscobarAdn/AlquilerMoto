@@ -3,6 +3,7 @@ package com.ceiba.alquiler.persona.controlador;
 import com.ceiba.alquiler.ComandoRespuesta;
 import com.ceiba.alquiler.comando.ComandoPersona;
 import com.ceiba.alquiler.comando.manejador.ManejadorCrearPersona;
+import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ComandoControladorPersona {
 
     @PostMapping
     @ApiOperation("Crear Persona")
-    public ComandoRespuesta<Integer> crear(@RequestBody ComandoPersona comandoPersona) {
+    public ComandoRespuesta<DtoRespuestaPersona> crear(@RequestBody ComandoPersona comandoPersona) {
         return manejadorCrearPersona.ejecutar(comandoPersona);
     }
 }

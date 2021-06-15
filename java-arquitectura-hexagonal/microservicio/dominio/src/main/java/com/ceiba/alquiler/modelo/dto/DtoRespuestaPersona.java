@@ -1,15 +1,11 @@
-package com.ceiba.alquiler.comando;
+package com.ceiba.alquiler.modelo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
-public class ComandoPersona {
-
+public class DtoRespuestaPersona {
     private Integer idPersona;
     private int cedula;
     private String nombre;

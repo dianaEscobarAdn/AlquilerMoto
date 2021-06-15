@@ -7,6 +7,4 @@ public interface RepositorioPersona {
     Integer crear(Persona persona);
 
     Persona buscarPersonaPorId(Integer idPersona);
-
-    //void actualizar(Persona persona);
 }

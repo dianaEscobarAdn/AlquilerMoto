@@ -19,11 +19,6 @@ public class ComandoPersonaTestDataBuilder {
         direccion = "calle 10";
     }
 
-    public ComandoPersonaTestDataBuilder conNombre(String nombre) {
-        this.nombre = nombre;
-        return this;
-    }
-
     public ComandoPersona build() {
         return new ComandoPersona(idPersona,cedula, nombre,apellido,telefono,direccion);
     }

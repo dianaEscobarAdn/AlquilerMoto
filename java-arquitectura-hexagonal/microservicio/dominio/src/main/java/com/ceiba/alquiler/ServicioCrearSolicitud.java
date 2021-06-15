@@ -1,36 +1,30 @@
 package com.ceiba.alquiler;
 
-import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
+import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.modelo.entidad.Solicitud;
-import com.ceiba.alquiler.puerto.dao.DaoSolicitud;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioProducto;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioSolicitud;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.util.List;
-
 
 public class ServicioCrearSolicitud {
     private RepositorioSolicitud repositorioSolicitud;
     private RepositorioProducto repositorioProducto;
-    private DaoSolicitud daoSolicitud;
-
-    public ServicioCrearSolicitud(RepositorioSolicitud repositorioSolicitud, RepositorioProducto repositorioProducto, DaoSolicitud daoSolicitud) {
+    private static final String PRODUCTO_SIN_CANTIDADES_DISPONIBLES = "El producto no cuenta con cantidades disponibles o no ha sido creado";
+    public ServicioCrearSolicitud(RepositorioSolicitud repositorioSolicitud, RepositorioProducto repositorioProducto) {
         this.repositorioSolicitud = repositorioSolicitud;
         this.repositorioProducto = repositorioProducto;
-        this.daoSolicitud = daoSolicitud;
     }
 
-    public Integer ejecutar(Solicitud solicitud) {
+    public DtoRespuestaSolicitud ejecutar(Solicitud solicitud) {
         if (!tieneCantidadesDisponiblesPorProducto(solicitud.getIdProducto())) {
-            return solicitud.getIdSolicitud();
+            throw new ExcepcionValorInvalido(PRODUCTO_SIN_CANTIDADES_DISPONIBLES);
         }
         Integer idSolicitud = this.repositorioSolicitud.crear(solicitud);
-        //DtoSolicitud solicitudCreada = this.daoSolicitud.consultarSolicitud(idSolicitud);
+        Solicitud solicitudCreada = this.repositorioSolicitud.buscarSolicitudPorId(idSolicitud);
+        DtoRespuestaSolicitud dtoRespuestaSolicitud = ConvertirADtoRespuesta(solicitudCreada);
         BuscarYActualizarCantidadesDelproducto(solicitud.getIdProducto());
-        return idSolicitud;
+        return dtoRespuestaSolicitud;
     }
 
     private boolean tieneCantidadesDisponiblesPorProducto(int idProducto) {
@@ -46,5 +40,18 @@ public class ServicioCrearSolicitud {
             this.repositorioProducto.actualizar(cantidadDisponible);
         }
         return cantidadTotal;
+    }
+
+    public DtoRespuestaSolicitud ConvertirADtoRespuesta (Solicitud solicitudCreada){
+        return solicitudCreada != null ? new DtoRespuestaSolicitud(
+                solicitudCreada.getIdSolicitud(),
+                solicitudCreada.getIdProducto(),
+                solicitudCreada.getIdPersona(),
+                solicitudCreada.getFechaSolicitud(),
+                solicitudCreada.getDiasAlquiler(),
+                solicitudCreada.getFechaDevolucion(),
+                solicitudCreada.getValorSolicitud(),
+                solicitudCreada.getValorDeposito()
+        ) : null;
     }
 }

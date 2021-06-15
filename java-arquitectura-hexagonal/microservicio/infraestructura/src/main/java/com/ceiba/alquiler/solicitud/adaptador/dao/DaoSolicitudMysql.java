@@ -2,7 +2,6 @@ package com.ceiba.alquiler.solicitud.adaptador.dao;
 
 import com.ceiba.alquiler.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.alquiler.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.alquiler.modelo.dto.DtoProducto;
 import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.puerto.dao.DaoSolicitud;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -32,9 +31,6 @@ public class DaoSolicitudMysql implements DaoSolicitud {
 
     @Override
     public DtoSolicitud consultarSolicitud(Integer idSolicitud) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idSolicitud", idSolicitud);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListarPorId, paramSource, DtoSolicitud.class);
+        return null;
     }
 }

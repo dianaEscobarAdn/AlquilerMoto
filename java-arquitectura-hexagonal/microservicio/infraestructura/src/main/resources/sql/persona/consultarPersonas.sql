@@ -1,2 +1,1 @@
-select idPersona,cedula,nombre,apellido,telefono,direccion
-from persona
+select idPersona,cedula,nombre,apellido,telefono,direccion from persona

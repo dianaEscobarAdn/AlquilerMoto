@@ -1,4 +1,4 @@
-package com.ceiba.alquiler.testdatabuilder;
+package com.ceiba.alquiler.solicitud.servicio.testdatabuilder;
 
 import com.ceiba.alquiler.comando.ComandoSolicitud;
 
@@ -17,20 +17,17 @@ public class ComandoSolicitudTestDataBuilder {
     private Double valorDeposito;
 
     public ComandoSolicitudTestDataBuilder() {
-        String fechaSolicitudes = "2021-06-12";
-        LocalDate fechaSolicitudParseada = LocalDate.parse(fechaSolicitudes, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        idProducto = 12345;
-        idPersona = 12345;
-        fechaSolicitud = fechaSolicitudParseada;
-        diasAlquiler = 7;
-    }
-
-    public ComandoSolicitudTestDataBuilder conId(Integer idSolicitud) {
-        this.idSolicitud = idSolicitud;
-        return this;
+        idProducto = 1;
+        idPersona = 1;
+        fechaSolicitud = ParseoDeFechas("2021-06-16");
+        diasAlquiler = 5;
     }
 
     public ComandoSolicitud build() {
         return new ComandoSolicitud(idSolicitud,idProducto, idPersona,fechaSolicitud,diasAlquiler,fechaDevolucion,valorSolicitud,valorDeposito);
+    }
+
+    private LocalDate ParseoDeFechas(String fecha){
+        return LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

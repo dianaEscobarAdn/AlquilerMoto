@@ -2,6 +2,7 @@ package com.ceiba.alquiler.persona.controlador;
 
 import com.ceiba.alquiler.ApplicationMock;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -33,8 +34,6 @@ public class ConsultaControladorPersonaTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].nombre", is("test")));
+                .andExpect(jsonPath("$[0].idPersona", is(1)));
     }
-
-
 }

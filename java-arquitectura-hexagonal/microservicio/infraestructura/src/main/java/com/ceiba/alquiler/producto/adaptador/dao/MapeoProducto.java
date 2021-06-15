@@ -1,7 +1,6 @@
 package com.ceiba.alquiler.producto.adaptador.dao;
 
 import com.ceiba.alquiler.infraestructura.jdbc.MapperResult;
-import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.modelo.dto.DtoProducto;
 import org.springframework.jdbc.core.RowMapper;
 

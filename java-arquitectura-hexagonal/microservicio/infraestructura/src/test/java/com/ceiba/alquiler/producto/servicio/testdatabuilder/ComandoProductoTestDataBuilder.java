@@ -17,11 +17,6 @@ public class ComandoProductoTestDataBuilder {
         unidadesSolicitadas = 2;
     }
 
-    public ComandoProductoTestDataBuilder conCodigoProducto(String codigoProducto) {
-        this.codigoProducto = codigoProducto;
-        return this;
-    }
-
     public ComandoProducto build() {
         return new ComandoProducto(idProducto,codigoProducto, descripcionProducto,unidadesDisponibles,unidadesSolicitadas);
     }

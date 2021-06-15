@@ -1,6 +1,9 @@
 package com.ceiba.alquiler.servicio;
 
 import com.ceiba.alquiler.ServicioCrearProducto;
+import com.ceiba.alquiler.modelo.dto.DtoPersona;
+import com.ceiba.alquiler.modelo.dto.DtoProducto;
+import com.ceiba.alquiler.modelo.dto.DtoRespuestaProducto;
 import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioProducto;
 import org.junit.Test;
@@ -29,41 +32,40 @@ public class ServicioCrearProductoTest {
         ));
 
         //Ejecuccion del Test
-        int respuesta = new ServicioCrearProducto(repositorioProducto).ejecutar(this.producto);
+        DtoRespuestaProducto respuesta = new ServicioCrearProducto(repositorioProducto).ejecutar(this.producto);
         //Validacion del Test
-        assertEquals(1, respuesta);
+        assertEquals(1, respuesta.getIdProducto());
     }
 
-    /*@Test
+    @Test
     public void crearDtoProducto() {
-        DtoProducto pro = new DtoProducto (
+        DtoProducto producto = new DtoProducto (
                 1,
-                "123",
-                "Moto",
-                10,
-                5
+                "Moto123",
+                "Moto Dto",
+                5,
+                1
         );
-        assertEquals(1, pro.getIdProducto());
+        assertEquals(1, producto.getIdProducto());
+        assertEquals("Moto123", producto.getCodigoProducto());
+        assertEquals("Moto Dto", producto.getDescripcionProducto());
+        assertEquals(5, producto.getUnidadesDisponibles());
+        assertEquals(1, producto.getUnidadesComprometidas());
     }
 
-   @Test
-    public void crearProductoConCantidadesSolicitadasMayoresALasDisponiblesTest() {
-        //Configuracion para el Test
-        Producto productoFallido = new Producto(null,"123", "Moto", 10, 15);
-        RepositorioProducto repositorioProducto = Mockito.mock(RepositorioProducto.class);
-        Mockito.when(repositorioProducto.crear(productoFallido)).thenReturn(1);
-
-        Mockito.when(repositorioProducto.buscarProductoPorId(1)).thenReturn(new Producto(
+    @Test
+    public void crearDtoRespuestaProducto() {
+        DtoRespuestaProducto producto = new DtoRespuestaProducto (
                 1,
-                "123",
-                "Moto",
-                10,
-                15
-        ));
-
-        //Ejecuccion del Test
-        String respuesta = new ServicioCrearProducto(repositorioProducto).ejecutar(productoFallido);
-        //Validacion del Test
-        assertEquals("Error: Las unidades comprometidas no puede ser mayor a las unidades disponibles", respuesta);
-    }*/
+                "Moto123",
+                "Moto Dto",
+                5,
+                1
+        );
+        assertEquals(1, producto.getIdProducto());
+        assertEquals("Moto123", producto.getCodigoProducto());
+        assertEquals("Moto Dto", producto.getDescripcionProducto());
+        assertEquals(5, producto.getUnidadesDisponibles());
+        assertEquals(1, producto.getUnidadesComprometidas());
+    }
 }

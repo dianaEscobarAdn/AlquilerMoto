@@ -3,7 +3,6 @@ package com.ceiba.alquiler.configuracion;
 import com.ceiba.alquiler.ServicioCrearPersona;
 import com.ceiba.alquiler.ServicioCrearProducto;
 import com.ceiba.alquiler.ServicioCrearSolicitud;
-import com.ceiba.alquiler.puerto.dao.DaoSolicitud;
 import com.ceiba.alquiler.puerto.repositorio.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +21,8 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearSolicitud servicioCrearSolicitud(RepositorioSolicitud repositorioSolicitud,RepositorioProducto repositorioProducto, DaoSolicitud daoSolicitud) {
-        return new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto,daoSolicitud);
+    public ServicioCrearSolicitud servicioCrearSolicitud(RepositorioSolicitud repositorioSolicitud,RepositorioProducto repositorioProducto) {
+        return new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto);
     }
 
 }

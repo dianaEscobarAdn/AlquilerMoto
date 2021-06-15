@@ -19,11 +19,6 @@ public class PersonaTestDataBuilder {
         direccion = "Carrera 25c";
     }
 
-    public PersonaTestDataBuilder conCedula(Integer cedula) {
-        this.cedula = cedula;
-        return this;
-    }
-
     public Persona build() {
         return new Persona(idPersona,cedula, nombre,apellido,telefono,direccion);
     }

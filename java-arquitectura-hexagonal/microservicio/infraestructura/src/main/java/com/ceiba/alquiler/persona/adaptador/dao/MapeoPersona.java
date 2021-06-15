@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class MapeoPersona implements RowMapper<DtoPersona>, MapperResult {
 
@@ -22,5 +21,4 @@ public class MapeoPersona implements RowMapper<DtoPersona>, MapperResult {
 
         return new DtoPersona(idPersona,cedula,nombre,apellido,telefono,direccion);
     }
-
 }

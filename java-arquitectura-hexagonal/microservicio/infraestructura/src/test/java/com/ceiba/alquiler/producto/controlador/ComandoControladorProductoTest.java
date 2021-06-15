@@ -38,6 +38,6 @@ public class ComandoControladorProductoTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(producto)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 2}"));
+                .andExpect(content().json("{'respuesta':{'idProducto':2,'codigoProducto':'123456','descripcionProducto':'Moto Prueba Unitaria','unidadesDisponibles':10,'unidadesComprometidas':2}}"));
     }
 }
