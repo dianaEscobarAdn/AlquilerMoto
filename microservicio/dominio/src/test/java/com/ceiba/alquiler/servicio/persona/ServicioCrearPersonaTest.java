@@ -1,8 +1,11 @@
 package com.ceiba.alquiler.servicio.persona;
 
+import com.ceiba.alquiler.BasePrueba;
+import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
 import com.ceiba.alquiler.modelo.entidad.Persona;
+import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioPersona;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -73,4 +76,18 @@ public class ServicioCrearPersonaTest {
         assertEquals(22222, persona.getTelefono());
         assertEquals("calle 10", persona.getDireccion());
     }
+
+    @Test
+    public void CampoObligatorioTest() {
+
+        BasePrueba.assertThrows(() -> new Persona(
+                1,
+                123,
+                null,
+                "DTO",
+                22222,
+                "calle 10"
+        ), ExcepcionValorObligatorio.class,"Se debe ingresar el nombre de creación");
+    }
+
 }

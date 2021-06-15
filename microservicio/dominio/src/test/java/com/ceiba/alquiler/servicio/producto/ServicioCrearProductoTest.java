@@ -1,11 +1,16 @@
 package com.ceiba.alquiler.servicio.producto;
 
+import com.ceiba.alquiler.BasePrueba;
+import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.alquiler.modelo.dto.DtoProducto;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaProducto;
 import com.ceiba.alquiler.modelo.entidad.Producto;
+import com.ceiba.alquiler.modelo.entidad.Solicitud;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioProducto;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,5 +70,17 @@ public class ServicioCrearProductoTest {
         assertEquals("Moto Dto", producto.getDescripcionProducto());
         assertEquals(5, producto.getUnidadesDisponibles());
         assertEquals(1, producto.getUnidadesComprometidas());
+    }
+
+    @Test
+    public void CampoObligatorioTest() {
+
+        BasePrueba.assertThrows(() -> new Producto(
+                1,
+                null,
+                "Moto Dto",
+                5,
+                1
+        ), ExcepcionValorObligatorio.class,"Se debe ingresar el codigo del producto");
     }
 }

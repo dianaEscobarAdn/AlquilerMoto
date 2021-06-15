@@ -2,6 +2,7 @@ package com.ceiba.alquiler.servicio.solicitud;
 
 import com.ceiba.alquiler.BasePrueba;
 import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;
 import com.ceiba.alquiler.modelo.dto.DtoSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Producto;
@@ -144,4 +145,81 @@ public class ServicioCrearSolicitudTest {
     private LocalDate ParseoDeFechas(String fecha){
         return LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+
+    @Test
+    public void porFueraDelMinimoDeDiasTest() {
+        //Configuracion para el Test
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-15");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
+
+        //act - assert
+        BasePrueba.assertThrows(() -> new Solicitud (
+                1,
+                1,
+                1,
+                fechaSolicitud,
+                1,
+                fechaDevolucion,
+                175000.0,
+                35000.0
+        ), ExcepcionValorInvalido.class,"La solicitud se debe hacer con minímo uno  y maximo tres días de anticipación");
+    }
+
+    @Test
+    public void porFueraDelMaximoDeDiasTest() {
+        //Configuracion para el Test
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-20");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
+
+        //act - assert
+        BasePrueba.assertThrows(() -> new Solicitud (
+                1,
+                1,
+                1,
+                fechaSolicitud,
+                1,
+                fechaDevolucion,
+                175000.0,
+                35000.0
+        ), ExcepcionValorInvalido.class,"La solicitud se debe hacer con minímo uno  y maximo tres días de anticipación");
+    }
+
+    @Test
+    public void porFueraDelTiempoPermitidoTest() {
+        //Configuracion para el Test
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-18");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
+
+        //act - assert
+        BasePrueba.assertThrows(() -> new Solicitud (
+                1,
+                1,
+                1,
+                fechaSolicitud,
+                8,
+                fechaDevolucion,
+                175000.0,
+                35000.0
+        ), ExcepcionValorInvalido.class,"Error: Los días de alquiler es de 3 a 7");
+    }
+
+    @Test
+    public void CampoObligatorioTest() {
+        //Configuracion para el Test
+        LocalDate fechaSolicitud = ParseoDeFechas("2021-06-18");
+        LocalDate fechaDevolucion = ParseoDeFechas("2021-06-24");
+
+        //act - assert
+        BasePrueba.assertThrows(() -> new Solicitud (
+                1,
+                null,
+                1,
+                fechaSolicitud,
+                8,
+                fechaDevolucion,
+                175000.0,
+                35000.0
+        ), ExcepcionValorObligatorio.class,"Se debe ingresar el id del producto");
+    }
+
 }
