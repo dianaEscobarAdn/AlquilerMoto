@@ -61,9 +61,9 @@ public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperRe
     }
 
     @Override
-    public void eliminar(Integer idSolicitud) {
+    public void eliminar(Integer id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idSolicitud", idSolicitud);
+        paramSource.addValue(ID_SOLICITUD, id);
 
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
