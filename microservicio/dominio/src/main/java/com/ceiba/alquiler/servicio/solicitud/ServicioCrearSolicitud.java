@@ -23,7 +23,7 @@ public class ServicioCrearSolicitud {
         Integer idSolicitud = this.repositorioSolicitud.crear(solicitud);
         Solicitud solicitudCreada = this.repositorioSolicitud.buscarSolicitudPorId(idSolicitud);
         DtoRespuestaSolicitud dtoRespuestaSolicitud = convertirADtoRespuesta(solicitudCreada);
-        BuscarYActualizarCantidadesDelproducto(solicitud.getIdProducto());
+        buscarYActualizarCantidadesDelproducto(solicitud.getIdProducto());
         return dtoRespuestaSolicitud;
     }
 
@@ -32,9 +32,9 @@ public class ServicioCrearSolicitud {
         return cantidadDisponible != null && cantidadDisponible.getUnidadesComprometidas() < cantidadDisponible.getUnidadesDisponibles() ? true : false;
     }
 
-    private Integer BuscarYActualizarCantidadesDelproducto(int idProducto) {
+    private Integer buscarYActualizarCantidadesDelproducto(int idProducto) {
         Producto cantidadDisponible = this.repositorioProducto.buscarProductoPorId(idProducto);
-        Integer cantidadTotal = cantidadDisponible != null ? cantidadDisponible.getUnidadesComprometidas() + 1 : 0;
+        Integer cantidadTotal = cantidadDisponible != null ? (cantidadDisponible.getUnidadesComprometidas() + 1) : 0;
         if (cantidadTotal != 0) {
             cantidadDisponible.setUnidadesComprometidas(cantidadTotal);
             this.repositorioProducto.actualizar(cantidadDisponible);
