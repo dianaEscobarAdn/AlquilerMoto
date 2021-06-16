@@ -1,5 +1,6 @@
 package com.ceiba.alquiler.servicio.solicitud;
 
+import com.ceiba.alquiler.dominio.ValidadorArgumento;
 import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaSolicitud;
 import com.ceiba.alquiler.modelo.entidad.Producto;
@@ -11,6 +12,8 @@ public class ServicioCrearSolicitud {
     private RepositorioSolicitud repositorioSolicitud;
     private RepositorioProducto repositorioProducto;
     private static final String PRODUCTO_SIN_CANTIDADES_DISPONIBLES = "El producto no cuenta con cantidades disponibles o no ha sido creado";
+    private static final String NO_ENCONTRO_LA_SOLICITUD_CREADA = "No encontro la solicitud creada";
+    private static final String NO_ENCONTRO_EL_PRODUCTO = "No encontro el producto";
     public ServicioCrearSolicitud(RepositorioSolicitud repositorioSolicitud, RepositorioProducto repositorioProducto) {
         this.repositorioSolicitud = repositorioSolicitud;
         this.repositorioProducto = repositorioProducto;
@@ -22,19 +25,21 @@ public class ServicioCrearSolicitud {
         }
         Integer idSolicitud = this.repositorioSolicitud.crear(solicitud);
         Solicitud solicitudCreada = this.repositorioSolicitud.buscarSolicitudPorId(idSolicitud);
-        DtoRespuestaSolicitud dtoRespuestaSolicitud = convertirADtoRespuesta(solicitudCreada);
         buscarYActualizarCantidadesDelproducto(solicitud.getIdProducto());
-        return dtoRespuestaSolicitud;
+        ValidadorArgumento.validarObligatorio(solicitudCreada, NO_ENCONTRO_LA_SOLICITUD_CREADA);
+        return convertirADtoRespuesta(solicitudCreada);
     }
 
     private boolean tieneCantidadesDisponiblesPorProducto(int idProducto) {
         Producto cantidadDisponible = this.repositorioProducto.buscarProductoPorId(idProducto);
-        return cantidadDisponible != null && cantidadDisponible.getUnidadesComprometidas() < cantidadDisponible.getUnidadesDisponibles() ? true : false;
+        ValidadorArgumento.validarObligatorio(cantidadDisponible, PRODUCTO_SIN_CANTIDADES_DISPONIBLES);
+        return cantidadDisponible.getUnidadesComprometidas() < cantidadDisponible.getUnidadesDisponibles();
     }
 
     private Integer buscarYActualizarCantidadesDelproducto(int idProducto) {
         Producto cantidadDisponible = this.repositorioProducto.buscarProductoPorId(idProducto);
-        Integer cantidadTotal = cantidadDisponible != null ? (cantidadDisponible.getUnidadesComprometidas() + 1) : 0;
+        ValidadorArgumento.validarObligatorio(cantidadDisponible, NO_ENCONTRO_EL_PRODUCTO);
+        Integer cantidadTotal = cantidadDisponible.getUnidadesComprometidas() + 1;
         if (cantidadTotal != 0) {
             cantidadDisponible.setUnidadesComprometidas(cantidadTotal);
             this.repositorioProducto.actualizar(cantidadDisponible);
@@ -43,7 +48,7 @@ public class ServicioCrearSolicitud {
     }
 
     public DtoRespuestaSolicitud convertirADtoRespuesta (Solicitud solicitudCreada){
-        return solicitudCreada != null ? new DtoRespuestaSolicitud(
+        return new DtoRespuestaSolicitud(
                 solicitudCreada.getIdSolicitud(),
                 solicitudCreada.getIdProducto(),
                 solicitudCreada.getIdPersona(),
@@ -52,6 +57,6 @@ public class ServicioCrearSolicitud {
                 solicitudCreada.getFechaDevolucion(),
                 solicitudCreada.getValorSolicitud(),
                 solicitudCreada.getValorDeposito()
-        ) : null;
+        );
     }
 }
