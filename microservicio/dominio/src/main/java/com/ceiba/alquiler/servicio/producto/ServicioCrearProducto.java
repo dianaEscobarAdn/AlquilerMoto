@@ -16,8 +16,7 @@ public class ServicioCrearProducto {
     public DtoRespuestaProducto ejecutar(Producto producto) {
        Integer idProducto = this.repositorioProducto.crear(producto);
        Producto productoCreado = this.repositorioProducto.buscarProductoPorId(idProducto);
-       DtoRespuestaProducto dtoRespuestaPersona = convertirADtoRespuesta(productoCreado);
-       return dtoRespuestaPersona;
+       return convertirADtoRespuesta(productoCreado);
     }
 
     public DtoRespuestaProducto convertirADtoRespuesta (Producto productoCreado){
