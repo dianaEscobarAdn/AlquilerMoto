@@ -45,7 +45,7 @@ public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperRe
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarSolicitud,paramSource,new RowMapper<Solicitud>() {
             @Override
             public Solicitud mapRow(ResultSet rs, int rownumber) throws SQLException {
-                Solicitud solicitud = new Solicitud(
+                return new Solicitud(
                         rs.getInt(ID_SOLICITUD),
                         rs.getInt("idProducto"),
                         rs.getInt("idPersona"),
@@ -55,7 +55,6 @@ public class RepositorioSolicitudMysql implements RepositorioSolicitud, MapperRe
                         rs.getDouble("valorSolicitud"),
                         rs.getDouble("valorDeposito")
                 );
-                return solicitud;
             }
         });
     }

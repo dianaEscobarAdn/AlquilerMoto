@@ -44,7 +44,7 @@ public class RepositorioPersonaMysql implements RepositorioPersona {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarPersona,paramSource,new RowMapper<Persona>() {
             @Override
             public Persona mapRow(ResultSet rs, int rownumber) throws SQLException {
-                Persona persona = new Persona(
+                return new Persona(
                         rs.getInt(ID_PERSONA),
                         rs.getInt("cedula"),
                         rs.getString("nombre"),
@@ -52,7 +52,6 @@ public class RepositorioPersonaMysql implements RepositorioPersona {
                         rs.getInt("telefono"),
                         rs.getString("direccion")
                 );
-                return persona;
             }
         });
     }

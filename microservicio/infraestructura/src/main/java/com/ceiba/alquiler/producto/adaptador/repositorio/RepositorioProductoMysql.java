@@ -47,14 +47,13 @@ public class RepositorioProductoMysql implements RepositorioProducto {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlConsultarProducto, paramSource, new RowMapper<Producto>() {
             @Override
             public Producto mapRow(ResultSet rs, int rownumber) throws SQLException {
-                Producto producto = new Producto(
+                return new Producto(
                         rs.getInt(ID_PRODUCTO),
                         rs.getString("codigoProducto"),
                         rs.getString("descripcionProducto"),
                         rs.getInt("unidadesDisponibles"),
                         rs.getInt("unidadesComprometidas")
                 );
-                return producto;
             }
         });
     }
