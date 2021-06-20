@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/producto")
 @Api(tags = { "Controlador comando producto"})
+@CrossOrigin(origins = {"http://localhost:4200"} ,maxAge = 600)
 public class ComandoControladorProducto {
 
     private final ManejadorCrearProducto manejadorCrearProducto;
@@ -25,6 +26,7 @@ public class ComandoControladorProducto {
     }
 
     @PostMapping
+    @CrossOrigin(origins = {"http://localhost:4200"} ,maxAge = 600)
     @ApiOperation("Crear Producto")
     public ComandoRespuesta<DtoRespuestaProducto> crear(@RequestBody ComandoProducto comandoProducto) {
         return manejadorCrearProducto.ejecutar(comandoProducto);

@@ -6,22 +6,22 @@ import com.ceiba.alquiler.comando.fabrica.FabricaPersona;
 import com.ceiba.alquiler.manejador.ManejadorComandoRespuesta;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
 import com.ceiba.alquiler.modelo.entidad.Persona;
-import com.ceiba.alquiler.servicio.persona.ServicioCrearPersona;
+import com.ceiba.alquiler.servicio.persona.ServicioRegistrarPersona;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ManejadorCrearPersona implements ManejadorComandoRespuesta<ComandoPersona, ComandoRespuesta<DtoRespuestaPersona>> {
 
     private final FabricaPersona fabricaPersona;
-    private ServicioCrearPersona servicioCrearPersona;
+    private ServicioRegistrarPersona servicioRegistrarPersona;
 
-    public ManejadorCrearPersona(FabricaPersona fabricaPersona, ServicioCrearPersona servicioCrearPersona) {
+    public ManejadorCrearPersona(FabricaPersona fabricaPersona, ServicioRegistrarPersona servicioRegistrarPersona) {
         this.fabricaPersona = fabricaPersona;
-        this.servicioCrearPersona = servicioCrearPersona;
+        this.servicioRegistrarPersona = servicioRegistrarPersona;
     }
 
     public ComandoRespuesta<DtoRespuestaPersona> ejecutar(ComandoPersona comandoPersona) {
         Persona persona = this.fabricaPersona.crear(comandoPersona);
-        return new ComandoRespuesta<>(this.servicioCrearPersona.ejecutar(persona));
+        return new ComandoRespuesta<>(this.servicioRegistrarPersona.ejecutar(persona));
     }
 }

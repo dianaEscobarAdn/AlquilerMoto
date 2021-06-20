@@ -5,18 +5,17 @@ import com.ceiba.alquiler.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.alquiler.modelo.dto.DtoPersona;
 import com.ceiba.alquiler.modelo.dto.DtoRespuestaPersona;
 import com.ceiba.alquiler.modelo.entidad.Persona;
-import com.ceiba.alquiler.modelo.entidad.Producto;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioPersona;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ServicioCrearPersonaTest {
+public class ServicioRegistrarPersonaTest {
 
     Persona persona;
 
-    public ServicioCrearPersonaTest() {
+    public ServicioRegistrarPersonaTest() {
         this.persona = new Persona(null,123, "Diana", "Escobar", 123, "Calle 10");
     }
 
@@ -36,7 +35,7 @@ public class ServicioCrearPersonaTest {
         ));
 
         //Ejecuccion del Test
-        DtoRespuestaPersona respuesta = new ServicioCrearPersona(repositorioPersona).ejecutar(this.persona);
+        DtoRespuestaPersona respuesta = new ServicioRegistrarPersona(repositorioPersona).ejecutar(this.persona);
         //Validacion del Test
         assertEquals(1, respuesta.getIdPersona().intValue());
     }

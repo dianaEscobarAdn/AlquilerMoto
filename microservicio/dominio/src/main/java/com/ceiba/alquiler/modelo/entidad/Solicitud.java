@@ -110,14 +110,14 @@ public class Solicitud {
     }
 
     private LocalDate calcularFechaMaximaDevolucion() {
-        LocalDate result = this.fechaSolicitud;
+        LocalDate localDate = this.fechaSolicitud;
         int diasFestivos = 0;
         while (diasFestivos < this.diasAlquiler) {
-            result = result.plusDays(1);
-            if (result.getDayOfWeek() != DayOfWeek.SUNDAY) {
+            localDate = localDate.plusDays(1);
+            if (localDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
                 ++diasFestivos;
             }
         }
-        return result;
+        return localDate;
     }
 }

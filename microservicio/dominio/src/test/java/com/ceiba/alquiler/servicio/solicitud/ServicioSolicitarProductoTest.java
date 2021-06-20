@@ -18,11 +18,11 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ServicioCrearSolicitudTest {
+public class ServicioSolicitarProductoTest {
 
     Solicitud solicitud;
 
-    public ServicioCrearSolicitudTest() {
+    public ServicioSolicitarProductoTest() {
         LocalDate localDate = ParseoDeFechas("2021-06-18");
         this.solicitud = new Solicitud(null,12345, 12345, localDate, 5);
     }
@@ -55,7 +55,7 @@ public class ServicioCrearSolicitudTest {
                 35000.0
         ));
         //Ejecuccion del Test
-        DtoRespuestaSolicitud respuesta = new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud);
+        DtoRespuestaSolicitud respuesta = new ServicioSolicitarProducto(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud);
         //Validacion del Test
         assertEquals(1, respuesta.getIdSolicitud().intValue());
     }
@@ -90,7 +90,7 @@ public class ServicioCrearSolicitudTest {
 
         ));
         //act - assert
-        BasePrueba.assertThrows(() -> new ServicioCrearSolicitud(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud), ExcepcionValorInvalido.class,"El producto no cuenta con cantidades disponibles o no ha sido creado");
+        BasePrueba.assertThrows(() -> new ServicioSolicitarProducto(repositorioSolicitud,repositorioProducto).ejecutar(this.solicitud), ExcepcionValorInvalido.class,"El producto no cuenta con cantidades disponibles o no ha sido creado");
     }
 
     @Test

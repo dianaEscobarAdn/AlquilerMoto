@@ -10,8 +10,6 @@ public class ServicioCrearProducto {
 
     private final RepositorioProducto repositorioProducto;
 
-    public static final String ERROR_NO_ENCONTRO_EL_PRODUCTO_CREADO = "Error: no encontro el producto creado";
-
     public ServicioCrearProducto(RepositorioProducto repositorioProducto) {
         this.repositorioProducto = repositorioProducto;
     }
@@ -19,7 +17,6 @@ public class ServicioCrearProducto {
     public DtoRespuestaProducto ejecutar(Producto producto) {
        Integer idProducto = this.repositorioProducto.crear(producto);
        Producto productoCreado = this.repositorioProducto.buscarProductoPorId(idProducto);
-       ValidadorArgumento.validarObligatorio(productoCreado, ERROR_NO_ENCONTRO_EL_PRODUCTO_CREADO);
        return convertirADtoRespuesta(productoCreado);
     }
 

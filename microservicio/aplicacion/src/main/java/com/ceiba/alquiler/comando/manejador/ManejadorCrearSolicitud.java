@@ -1,7 +1,7 @@
 package com.ceiba.alquiler.comando.manejador;
 
 import com.ceiba.alquiler.ComandoRespuesta;
-import com.ceiba.alquiler.servicio.solicitud.ServicioCrearSolicitud;
+import com.ceiba.alquiler.servicio.solicitud.ServicioSolicitarProducto;
 import com.ceiba.alquiler.comando.ComandoSolicitud;
 import com.ceiba.alquiler.comando.fabrica.FabricaSolicitud;
 import com.ceiba.alquiler.manejador.ManejadorComandoRespuesta;
@@ -26,6 +26,6 @@ public class ManejadorCrearSolicitud implements ManejadorComandoRespuesta<Comand
 
     public ComandoRespuesta<DtoRespuestaSolicitud> ejecutar(ComandoSolicitud comandoSolicitud) {
         Solicitud solicitud = this.fabricaSolicitud.crear(comandoSolicitud);
-        return new ComandoRespuesta<>(new ServicioCrearSolicitud(this.repositorioSolicitud, this.repositorioProducto).ejecutar(solicitud));
+        return new ComandoRespuesta<>(new ServicioSolicitarProducto(this.repositorioSolicitud, this.repositorioProducto).ejecutar(solicitud));
     }
 }

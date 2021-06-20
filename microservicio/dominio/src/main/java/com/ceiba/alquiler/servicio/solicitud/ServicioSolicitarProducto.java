@@ -8,13 +8,12 @@ import com.ceiba.alquiler.modelo.entidad.Solicitud;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioProducto;
 import com.ceiba.alquiler.puerto.repositorio.RepositorioSolicitud;
 
-public class ServicioCrearSolicitud {
+public class ServicioSolicitarProducto {
     private RepositorioSolicitud repositorioSolicitud;
     private RepositorioProducto repositorioProducto;
     private static final String PRODUCTO_SIN_CANTIDADES_DISPONIBLES = "El producto no cuenta con cantidades disponibles o no ha sido creado";
-    private static final String NO_ENCONTRO_LA_SOLICITUD_CREADA = "No encontro la solicitud creada";
     private static final String NO_ENCONTRO_EL_PRODUCTO = "No encontro el producto";
-    public ServicioCrearSolicitud(RepositorioSolicitud repositorioSolicitud, RepositorioProducto repositorioProducto) {
+    public ServicioSolicitarProducto(RepositorioSolicitud repositorioSolicitud, RepositorioProducto repositorioProducto) {
         this.repositorioSolicitud = repositorioSolicitud;
         this.repositorioProducto = repositorioProducto;
     }
@@ -26,7 +25,6 @@ public class ServicioCrearSolicitud {
         Integer idSolicitud = this.repositorioSolicitud.crear(solicitud);
         Solicitud solicitudCreada = this.repositorioSolicitud.buscarSolicitudPorId(idSolicitud);
         buscarYActualizarCantidadesDelproducto(solicitud.getIdProducto());
-        ValidadorArgumento.validarObligatorio(solicitudCreada, NO_ENCONTRO_LA_SOLICITUD_CREADA);
         return convertirADtoRespuesta(solicitudCreada);
     }
 
